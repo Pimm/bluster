@@ -1,0 +1,38 @@
+{
+  "name": "bluster",
+  "description": "🌵",
+  "version": "1.0.0",
+  "main": "compiled/cjs/bluster.min.js",
+  "module": "compiled/esm/bluster.min.js",
+  "types": "index.d.ts",
+  "license": "MIT",
+  "dependencies": {
+    "expect": "24.9.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.6.2",
+    "jest": "^24.9.0",
+    "rollup": "^1.22.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "typescript": "^3.6.3"
+  },
+  "scripts": {
+    "build": "rollup --config rollup.config.js",
+    "test": "npm run-script build && jest && tsc --strict --noEmit test/type-test.ts"
+  },
+  "author": {
+    "name": "Pimm \"de Chinchilla\" Hogeling",
+    "url": "https://null.house"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pimm/bluster.git"
+  },
+  "homepage": "https://null.house/open-source/bluster",
+  "keywords": [
+    "test",
+    "async",
+    "promise",
+    "callback"
+  ]
+}

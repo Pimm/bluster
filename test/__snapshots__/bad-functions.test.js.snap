@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`bad-functions: doOnlyPromises 1`] = `
+Object {
+  "cause": [TypeError: callback is not a function],
+  "message": "An error occurred while calling the passed function promise-style",
+}
+`;
+
+exports[`bad-functions: failCallback 1`] = `
+Object {
+  "cause": [Error: No good!],
+  "message": "An error occurred while calling the passed function callback-style",
+}
+`;
+
+exports[`bad-functions: rejectCallback 1`] = `
+Object {
+  "cause": [Error: No good!],
+  "message": "The promise-style call fulfilled whereas the callback-style call rejected",
+}
+`;
+
+exports[`bad-functions: rejectPromise 1`] = `
+Object {
+  "cause": [Error: No good!],
+  "message": "The promise-style call rejected whereas the callback-style call fulfilled",
+}
+`;
