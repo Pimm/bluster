@@ -10,7 +10,8 @@ type CallbackTarget<T> = ((callback: Callback<T>) => void)
 		| ((a: any, b: any, c: any, d: any, e: any, f: any, g: any, callback: Callback<T>) => void)
 		| ((a: any, b: any, c: any, d: any, e: any, f: any, g: any, h: any, callback: Callback<T>) => void);
 /**
- * Calls the passed target function *twice*, once promise-style and once callback-style.
+ * Creates a wrapper around the passed target function which calls it *twice*: once promise-style and once callback-
+ * style.
  *
  * Think of this single line
  * ```javascript
