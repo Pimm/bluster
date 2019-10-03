@@ -77,19 +77,19 @@ function generateRejectionBitmap(settlements) {
  *
  * Think of this single line
  * ```javascript
- * bluster(openDatabase)('example.db');
+ * bluster(getResource)('example.gz');
  * ```
  * as the alterenative to both these lines
  * ```javascript
- * const promise = openDatabase('example.db');
- * openDatabase('example.db', callback);
+ * const promise = getResource('example.gz');
+ * getResource('example.gz', callback);
  * ```
  *
  * This facilitates testing both the promise-style and the callback-style branches in one go:
  *
  * ```javascript
- * const database = await bluster(openDatabase)('example.db')
- * // Perform assertions on the database.
+ * const resource = await bluster(getResource)('example.gz');
+ * // Perform assertions on the resource.
  * ```
  *
  * A promise is returned which either:
@@ -117,6 +117,28 @@ function generateRejectionBitmap(settlements) {
  *
  * If you require deep equality testing, provide an equality tester as the second argument. It is possible to pass in
  * Lodash' `_.isEqual`, for example.
+ *
+ * #### On the `this` keyword
+ *
+ * If the wrapped target function uses the `this` keyword, you will have to assure that it has the correct value.
+ *
+ * Consider this line
+ * ```javascript
+ * const users = await database.listUsers({ limit: 100 });
+ * ```
+ * Blustering that function would discard the value of `this`. That can be prevented with `bind`:
+ * ```javascript
+ * const blusteredListUsers = bluster(database.listUsers.bind(database));
+ * const users = await blusteredListUsers({ limit: 100 });
+ * ```
+ * Alternatively, it can be prevented with `call`:
+ * ```javascript
+ * const blusteredListUsers = bluster(database.listUsers);
+ * const users = await blusteredListUsers.call(database, { limit: 100 });
+ * ```
+ *
+ * This effect is not unique to this library; it is standard in JavaScript. Read more:
+ * https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/this#As_an_object_method
  */
 export default function bluster(target, equalityTester, timeout) {
 	const blusteredTarget = function() {

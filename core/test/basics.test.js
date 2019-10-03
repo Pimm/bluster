@@ -43,10 +43,10 @@ function failGettingCoordinates() {
 test('basics', () => {
 	const blusteredGetCoordinates = bluster(getCoordinates);
 	const blusteredGetCoordinatesForDevice = bluster(getCoordinatesForDevice);
-	const blusteredError = bluster(failGettingCoordinates);
+	const blusteredFailGettingCoordinates = bluster(failGettingCoordinates);
 	return Promise.all([
 		expect(blusteredGetCoordinates()).resolves.toEqual([51.98190, 5.91417]),
 		expect(blusteredGetCoordinatesForDevice('local-1')).resolves.toEqual([51.97489, 5.91168]),
-		expect(blusteredError()).rejects.toThrow('Coordinates service not available')
+		expect(blusteredFailGettingCoordinates()).rejects.toThrow('Coordinates service not available')
 	]);
 });
