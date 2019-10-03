@@ -1,0 +1,34 @@
+{
+  "name": "jest-bluster",
+  "description": "🌵",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "bluster": "1.0.0",
+    "expect": "24.9.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["./index.js"]
+  },
+  "author": {
+    "name": "Pimm \"de Chinchilla\" Hogeling",
+    "url": "https://null.house"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pimm/bluster.git",
+    "directory": "jest"
+  },
+  "homepage": "https://null.house/open-source/bluster",
+  "keywords": [
+    "jest",
+    "test",
+    "async",
+    "promise",
+    "callback"
+  ]
+}

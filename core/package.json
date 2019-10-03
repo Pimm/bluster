@@ -25,7 +25,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pimm/bluster.git"
+    "url": "https://github.com/Pimm/bluster.git",
+    "directory": "core"
   },
   "homepage": "https://null.house/open-source/bluster",
   "keywords": [
