@@ -19,9 +19,12 @@ test('custom-equality-testing', () => {
 	return Promise.all([
 		expect(bluster(asynchronousIdentity)(undefined, undefined)).resolves.toBe(undefined),
 		expect(bluster(asynchronousIdentity)(null, null)).resolves.toBe(null),
+		expect(bluster(asynchronousIdentity)(undefined, null)).rejects.toThrow('are not equal'),
 		expect(bluster(asynchronousIdentity)(true, true)).resolves.toBe(true),
+		expect(bluster(asynchronousIdentity)(true, false)).rejects.toThrow('are not equal'),
 		expect(bluster(asynchronousIdentity)(NaN, NaN)).resolves.toBeNaN(),
 		expect(bluster(asynchronousIdentity)(8, 8)).resolves.toBe(8),
+		expect(bluster(asynchronousIdentity)(+0, -0)).rejects.toThrow('are not equal'),
 		expect(bluster(asynchronousIdentity)('turnip', 'turnip')).resolves.toBe('turnip'),
 		expect(bluster(asynchronousIdentity)(bluster, bluster)).resolves.toBe(bluster),
 		expect(bluster(asynchronousIdentity)(new Error('wonderland'), { text: 'wonderland' })).rejects.toThrow('are not equal'),
@@ -29,6 +32,7 @@ test('custom-equality-testing', () => {
 		expect(bluster(asynchronousIdentity)({ text: 'wonderland' }, { text: 'wonderland', cached: true })).rejects.toThrow('are not equal'),
 		expect(bluster(asynchronousIdentity)({ text: 'wonderland' }, { text: 'wonderland' })).resolves.toEqual({ text: 'wonderland' }),
 		expect(bluster(asynchronousIdentity)([Math.E], [Math.E])).resolves.toEqual([Math.E]),
+		expect(bluster(asynchronousIdentity)([Math.E], [2])).rejects.toThrow('are not equal'),
 		(() => {
 			const puppy = { name: 'Choco' };
 			const spider = { legCount: 8 };
