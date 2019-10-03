@@ -110,7 +110,7 @@ function generateRejectionBitmap(settlements) {
  *   * `true` equal to `true`;
  *   * `8` equal to `8`;
  *   * `{ text: 'wonderland' }` equal to `{ text: 'wonderland' }`; and
- *   * `[Math.E]` equal to `[Math.E]`;
+ *   * `[Math.PI]` equal to `[Math.PI]`;
  *
  * but considers `{ wrappee: { text: 'wonderland' } }` *inequal* to `{ wrappee: { text: 'wonderland' } }` because the
  * primitive (string) is burried too deep.
