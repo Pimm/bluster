@@ -9,6 +9,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
+    "coverage": "cd core && npm run-script coverage",
     "test": "lerna run test"
   }
 }
