@@ -13,5 +13,5 @@ function getCoordinates() {
 	}
 }
 test('get-coordinates', () => {
-	return expect(bluster(getCoordinates)).resolves.toEqual([51.98190, 5.91417]);
+	return expect(bluster(getCoordinates)()).resolves.toEqual([51.98190, 5.91417]);
 });

@@ -39,8 +39,8 @@ function equalityTester(first, second) {
  *   * if the two branches do not behave identical, rejects to an error which explains the situation.
  *
  * Put differently, the test above will fail if:
- *   * either `const promise = getResource('example.gz)` or `getResource('example.gz', callback)` produces an error, or
- *   * `const promise = getResource('example.gz)` and `getResource('example.gz', callback)` produce different values,
+ *   * either `const promise = getResource('example.gz')` or `getResource('example.gz', callback)` produces an error, or
+ *   * `const promise = getResource('example.gz')` and `getResource('example.gz', callback)` produce different values,
  *     or
  *   * that value produced by both branches does not match the snapshot.
  *
