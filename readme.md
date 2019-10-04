@@ -44,7 +44,7 @@ test('get-resource', () => {
 The test above will fail if:
  * either `const promise = getResource('example.gz)` or `getResource('example.gz', callback)` produces an error, or
  * `const promise = getResource('example.gz)` and `getResource('example.gz', callback)` produce different values, or
- * the value produced by both branches [doe not match the snapshot][jest-snapshots].
+ * the value produced by both branches [does not match the snapshot][jest-snapshots].
 
 A passing test assures the function behaves correctly both when used promise-style and when used callback-style.
 
