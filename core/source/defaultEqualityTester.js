@@ -43,10 +43,12 @@ export default function defaultEqualityTester(first, second) {
 	// Return true if the second object has the exact same list of properties as the first one, with associated values
 	// which are equal.
 	return keysFirst.every(key => {
-		return Object.is(first[key], second[key])
-		// It is possible for a property to appear in the first object (as its own property) and for that same property to
-		// be inherited by the second object. In that case, the check above would pass, since it finds the inherited
-		// property in the second object. Check whether the property is the own property of the second object.
-				&& second.hasOwnProperty(key);
+		return (
+			Object.is(first[key], second[key])
+			// It is possible for a property to appear in the first object (as its own property) and for that same property to
+			// be inherited by the second object. In that case, the check above would pass, since it finds the inherited
+			// property in the second object. Check whether the property is the own property of the second object.
+			&& second.hasOwnProperty(key)
+		);
 	});
 }

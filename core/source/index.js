@@ -1,4 +1,8 @@
-import { wrapRejection, determineIsRejection, unwrapRejection } from './rejections';
+import {
+	wrapRejection,
+	determineIsRejection,
+	unwrapRejection
+} from './rejections';
 import defaultEqualityTester from './defaultEqualityTester';
 
 /**
@@ -15,13 +19,17 @@ function callPromiseStyle(target, thisArgument, originalArguments) {
 	try {
 		result = target.apply(thisArgument, originalArguments);
 	} catch (cause) {
-		let error = new Error('An error occurred while calling the passed function promise-style');
+		let error = new Error(
+			'An error occurred while calling the passed function promise-style'
+		);
 		error.cause = cause;
 		throw error;
 	}
 	// (Note that although there is only a check for the availability of "then", "catch" is used only a few lines below.)
 	if (null == result || undefined === result.then) {
-		throw new Error('The passed function did not return a promise (or otherwise thenable object)');
+		throw new Error(
+			'The passed function did not return a promise (or otherwise thenable object)'
+		);
 	}
 	return result
 	// If the promise-style call rejects, wrap that rejection.
@@ -50,7 +58,9 @@ function callCallbackStyle(target, thisArgument, originalArguments) {
 			});
 		});
 	} catch (cause) {
-		let error = new Error('An error occurred while calling the passed function callback-style');
+		let error = new Error(
+			'An error occurred while calling the passed function callback-style'
+		);
 		error.cause = cause;
 		throw error;
 	}
@@ -176,17 +186,25 @@ export default function bluster(target, equalityTester, timeout) {
 							//   ↓ This would of course ‒ virtually ‒ be the same as this:
 							// reject(errors[1]);
 						} else /* if (false == equalityTester(...errors)) */ {
-							reject(new Error('The errors to which the promise-style call and the callback-style call rejected are not equal'));
+							reject(
+								new Error(
+									'The errors to which the promise-style call and the callback-style call rejected are not equal'
+								)
+							);
 						}
 					// One of the calls rejecting and the other one fulfilling is unexpected, and definitely a bug in the target
 					// function. Reject to an error which explains the situtation.
 					} else /* if (0b01 == rejectionBitmap || 0b10 == rejectionBitmap) */ {
 						let error;
 						if (0b01 == rejectionBitmap) {
-							error = new Error('The promise-style call rejected whereas the callback-style call fulfilled');
+							error = new Error(
+								'The promise-style call rejected whereas the callback-style call fulfilled'
+							);
 							error.cause = unwrapRejection(settlements[0]);
 						} else /* if (0b10 == rejectionBitmap) */ {
-							error = new Error('The promise-style call fulfilled whereas the callback-style call rejected');
+							error = new Error(
+								'The promise-style call fulfilled whereas the callback-style call rejected'
+							);
 							error.cause = unwrapRejection(settlements[1]);
 						}
 						reject(error);
@@ -199,7 +217,11 @@ export default function bluster(target, equalityTester, timeout) {
 						//   ↓ This would of course ‒ virtually ‒ be the same as this:
 						// resolve(settlements[1]);
 					} else /* if (false == equalityTester(...settlements)) */ {
-						reject(new Error('The results of the promise-style call and the callback-style call are not equal'));
+						reject(
+							new Error(
+								'The results of the promise-style call and the callback-style call are not equal'
+							)
+						);
 					}
 				}
 			});
@@ -213,7 +235,12 @@ export default function bluster(target, equalityTester, timeout) {
 				const cancelTimeout = clearTimeout.bind(
 					undefined,
 					setTimeout(
-						reject.bind(undefined, new Error('Either the promise-style call or the callback-style call did not settle within the timeout (or neither did)')),
+						reject.bind(
+							undefined,
+							new Error(
+								'Either the promise-style call or the callback-style call did not settle within the timeout (or neither did)'
+							)
+						),
 						timeout
 					)
 				);
