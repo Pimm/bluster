@@ -50,3 +50,13 @@ test('basics', () => {
 		expect(blusteredFailGettingCoordinates()).rejects.toThrow('Coordinates service not available')
 	]);
 });
+test('basics-with-timeout', () => {
+	const blusteredGetCoordinates = bluster(getCoordinates, undefined, 10);
+	const blusteredGetCoordinatesForDevice = bluster(getCoordinatesForDevice, undefined, 10);
+	const blusteredFailGettingCoordinates = bluster(failGettingCoordinates, undefined, 10);
+	return Promise.all([
+		expect(blusteredGetCoordinates()).resolves.toEqual([51.98190, 5.91417]),
+		expect(blusteredGetCoordinatesForDevice('local-1')).resolves.toEqual([51.97489, 5.91168]),
+		expect(blusteredFailGettingCoordinates()).rejects.toThrow('Coordinates service not available')
+	]);
+});

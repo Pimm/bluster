@@ -202,18 +202,32 @@ export default function bluster(target, equalityTester, timeout) {
 						reject(new Error('The results of the promise-style call and the callback-style call are not equal'));
 					}
 				}
-			})
-			// In case there seems to be an error coming from our own code, throw it.
-			.catch(/* istanbul ignore next */ error => {
-				throw error;
 			});
-			// If after the callback the promise chain above has not been traversed, there is probably a bug in the target
-			// function. Reject to an error.
+			// Note that errors in the chain above are not caught. Any errors which might occur are uncatchable. This is by
+			// design: an error at this point means there is something wrong in our own implementation; not in that of the
+			// target function.
+			//
+			// If after the timeout the promise has not settled yet, there is probably a bug in the target function. Reject
+			// to an error.
 			if (undefined !== timeout) {
-				setTimeout(
-					reject.bind(undefined, new Error('Either the promise-style call or the callback-style call did not settle within the timeout (or neither did)')),
-					timeout
+				const cancelTimeout = clearTimeout.bind(
+					undefined,
+					setTimeout(
+						reject.bind(undefined, new Error('Either the promise-style call or the callback-style call did not settle within the timeout (or neither did)')),
+						timeout
+					)
 				);
+				// For hygiene purposes, clear the timeout set above when the promise does settle.
+				const originalResolve = resolve;
+				const originalReject = reject;
+				resolve = value => {
+					originalResolve(value);
+					cancelTimeout();
+				};
+				reject = error => {
+					originalReject(error);
+					cancelTimeout();
+				};
 			}
 		});
 	};
