@@ -10,7 +10,7 @@ const customTesters = [iterableEquality];
  *
  * This function mimics `expect(…).toEqual(…)` in Jest. In fact, it uses the same implementation under the hood.
  */
-function equalityTester(first, second) {
+function jestlikeEqualityTester(first, second) {
 	return equals(first, second, customTesters);
 }
 /**
@@ -44,6 +44,10 @@ function equalityTester(first, second) {
  *     or
  *   * that value produced by both branches does not match the snapshot.
  *
+ * The second argument is an optional equality tester which is used to determine whether the values from both branches
+ * or the errors from both branches are equal. If omitted, equality testing follows the same rules as
+ * `expect(…).toEqual(…)`.
+ *
  * #### On the `this` keyword
  *
  * If the wrapped target function uses the `this` keyword, you will have to assure that it has the correct value.
@@ -66,10 +70,13 @@ function equalityTester(first, second) {
  * This effect is not unique to this library; it is standard in JavaScript. Read more:
  * https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/this#As_an_object_method
  */
-global.bluster = function bluster(target) {
+global.bluster = function bluster(target, equalityTester) {
+	// If no equality tester was passed, use the equality tester which mimics expect(…).toEqual(…).
+	if (undefined === equalityTester) {
+		equalityTester = jestlikeEqualityTester;
+	}
 	return coreBluster(
 		target,
-		// Use the equality tester which mimics expect(…).toEqual(…).
 		equalityTester,
 		// Set the timeout to 4½ seconds, which is half a second shorter than Jest's default timeout of 5 seconds.
 		4500
