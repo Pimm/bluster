@@ -73,7 +73,7 @@ If no error is thrown, you can rest assured that the function behaves the same w
 
 ### Note
 
-`jest-bluster` uses Jest's internal (deep) equality tester. The agnostic `bluster`, however, uses a shallow equality tester by default. Nested objects and arrays could be wrongly flagged as not equal.
+`jest-bluster` uses Jest's internal (deep) equality tester. The agnostic `bluster` package, however, uses a shallow equality tester by default. Nested objects and arrays could be wrongly flagged as not equal.
 
 If your functions return nested objects or arrays, provide an equality tester as the second argument:
 ```javascript
