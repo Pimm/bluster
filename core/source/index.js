@@ -248,12 +248,12 @@ export default function bluster(target, equalityTester, timeout) {
 				const originalResolve = resolve;
 				const originalReject = reject;
 				resolve = value => {
-					originalResolve(value);
 					cancelTimeout();
+					originalResolve(value);
 				};
 				reject = error => {
-					originalReject(error);
 					cancelTimeout();
+					originalReject(error);
 				};
 			}
 		});
