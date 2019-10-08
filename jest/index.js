@@ -12,6 +12,29 @@ function jestlikeEqualityTester(first, second) {
 	return equals(first, second, customTesters);
 }
 /**
+ * Returns the current timeout Jest uses, in milliseconds, as set by `jest.setTimeout(…)`.
+ */
+var getJestTimeout;
+// (See src/index.ts in jest-runtime: https://github.com/facebook/jest/blob/master/packages/jest-runtime/src/index.ts.)
+if (global.jasmine) {
+	getJestTimeout = function() {
+		return global.jasmine._DEFAULT_TIMEOUT_INTERVAL;
+	};
+} else {
+	var testTimeoutSymbol;
+	try {
+		testTimeoutSymbol = Symbol.for('TEST_TIMEOUT_SYMBOL');
+		getJestTimeout = function() {
+			return global[testTimeoutSymbol];
+		};
+	} catch (error) {
+		getJestTimeout = function() {
+			// There's a typeof operator which will detect that this isn't a number.
+			return undefined;
+		};
+	}
+}
+/**
  * Creates a wrapper around the passed target function which calls it *twice*: once promise-style and once callback-
  * style.
  *
@@ -73,10 +96,18 @@ global.bluster = function bluster(target, equalityTester) {
 	if (undefined === equalityTester) {
 		equalityTester = jestlikeEqualityTester;
 	}
+	// Determine Jest's timeout. It is possible that jest.setTimeout(…) is called after this. The blustered function
+	// would be stuck with the old value. That would be slightly unfortunate.
+	var jestTimeout = getJestTimeout();
+	if ('number' != typeof jestTimeout) {
+		jestTimeout = 5000;
+	}
 	return coreBluster(
 		target,
 		equalityTester,
-		// Set the timeout to 4½ seconds, which is half a second shorter than Jest's default timeout of 5 seconds.
-		4500
+		// Set the timeout to half a second shorter than Jest's timeout, or half of Jest's timeout if that timeout is
+		// shorter than 1 second. This will hopefully cause bluster to time out before Jest does. Bluster timing out gives
+		// the user more helpful feedback than Jest timing out.
+		Math.max(jestTimeout - 500, jestTimeout / 2)
 	);
 };
