@@ -1,10 +1,8 @@
-const coreBluster = require('bluster');
+var coreBluster = require('bluster');
 // Note that we are depending on package internals here. As this package depends on a specific exact version of expect,
 // this should not break.
-const { equals } = require('expect/build/jasmineUtils');
-const { iterableEquality } = require('expect/build/utils');
-
-const customTesters = [iterableEquality];
+var equals = require('expect/build/jasmineUtils').equals;
+var customTesters = [require('expect/build/utils').iterableEquality];
 /**
  * Returns whether the two passed arguments are equal to each other (`true`) or not (`false`).
  *
