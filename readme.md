@@ -1,8 +1,8 @@
 # bluster &middot; [![License (X11/MIT)](https://badgen.net/github/license/pimm/bluster)](https://github.com/Pimm/bluster/blob/master/copying.txt) [![npm version](https://badgen.net/npm/v/bluster)](https://www.npmjs.com/package/bluster) [![Build status](https://travis-ci.org/Pimm/bluster.svg?branch=master)](https://travis-ci.org/Pimm/bluster) [![Coverage status](https://coveralls.io/repos/github/Pimm/bluster/badge.svg?branch=master)](https://coveralls.io/github/Pimm/bluster?branch=master)
 
-Testing both promises and callbacks in one go.
+Test both promises and callbacks in one go.
 
-# Concept
+# Rationale
 
 If your function supports both promise-style and callback-style asynchronous calls, `bluster` will cut your tests in half.
 
@@ -42,8 +42,8 @@ test('get-resource', () => {
 ```
 
 The test above will fail if:
- * either `const promise = getResource('example.gz)` or `getResource('example.gz', callback)` produces an error, or
- * `const promise = getResource('example.gz)` and `getResource('example.gz', callback)` produce different values, or
+ * either `const promise = getResource('example.gz')` or `getResource('example.gz', callback)` produces an error, or
+ * `const promise = getResource('example.gz')` and `getResource('example.gz', callback)` produce different values, or
  * the value produced by both branches [does not match the snapshot][jest-snapshots].
 
 A passing test assures the function behaves correctly both when used promise-style and when used callback-style.

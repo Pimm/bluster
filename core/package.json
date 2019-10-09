@@ -1,10 +1,17 @@
 {
   "name": "bluster",
-  "description": "🌵",
+  "description": "Test both promises and callbacks in one go",
   "version": "1.0.0",
   "main": "compiled/cjs/bluster.js",
   "module": "compiled/esm/bluster.js",
   "types": "index.d.ts",
+  "files": [
+    "source",
+    "compiled",
+    "index.d.ts",
+    "copying.txt",
+    "readme-nl.md"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@babel/preset-env": "^7.6.2",

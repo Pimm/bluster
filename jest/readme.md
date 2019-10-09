@@ -13,46 +13,36 @@ function getResource(name: string, callback: (error: Error, resource: Resource) 
 
 Developers can call this function promise-style and callback-style. Whichever they prefer and fits the rest of the project. Cool! But how would you go about testing this? `bluster` lets you test both branches at the cost of one.
 
-> ### **Jest users, see [`jest-bluster`][jest-bluster].**
-
 # Installation
 
-Install `bluster` using npm or Yarn and import the function in your tests:
-```javascript
-import bluster from 'bluster';
+Install `jest-bluster` using npm or Yarn and add it to your Jest configuration in package.json:
+```json
+{
+	…
+	"jest": {
+		"setupFilesAfterEnv": ["jest-bluster"]
+	},
+	…
+}
 ```
 
 # Usage
 
 Wrap your function using `bluster`:
-```javascript
-const resource = await bluster(getResource)('example.gz');
-// Perform assertions on the resource.
+``` javascript
+test('get-resource', () => {
+	return expect(
+		bluster(getResource)('example.gz')
+	).resolves.toMatchSnapshot();
+});
 ```
 
-This line throws an error if:
+The test above will fail if:
  * either `const promise = getResource('example.gz')` or `getResource('example.gz', callback)` produces an error, or
- * `const promise = getResource('example.gz')` and `getResource('example.gz', callback)` produce different values.
+ * `const promise = getResource('example.gz')` and `getResource('example.gz', callback)` produce different values, or
+ * the value produced by both branches [does not match the snapshot][jest-snapshots].
 
-If no error is thrown, you can rest assured that the function behaves the same when used promise-style and when used callback-style. As normal, you will now determine whether the `resource` constant is accurate.
-
-## Note
-
-This agnostic `bluster` package uses a shallow equality tester by default. Nested objects and arrays could be wrongly flagged as not equal.
-
-If your functions return nested objects or arrays, provide an equality tester as the second argument:
-```javascript
-bluster(
-	target,
-	(first, second) => {
-		// Returns whether first and second are equal to each
-		// other (true) or not (false).
-	}
-);
-```
-Existing deep equality testers which can be passed as the second argument include [deep-equal] and [Lodash'][lodash] `_.isEqual`.
-
-Note that [`jest-bluster`][jest-bluster] performs deep equality testing by default.
+A passing test assures the function behaves correctly both when used promise-style and when used callback-style.
 
 # License (X11/MIT)
 Copyright (c) 2019 Pimm "de Chinchilla" Hogeling
@@ -64,6 +54,4 @@ The above copyright notice and this permission notice shall be included in all c
 **The Software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. in no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the Software or the use or other dealings in the Software.**
 
 
-[jest-bluster]: https://github.com/Pimm/bluster/tree/master/jest
-[deep-equal]: https://www.npmjs.com/package/deep-equal
-[lodash]: https://www.npmjs.com/package/lodash
+[jest-snapshots]: https://jestjs.io/docs/snapshot-testing
