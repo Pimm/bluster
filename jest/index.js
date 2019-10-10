@@ -2,11 +2,24 @@ var coreBluster = require('bluster');
 // Note that we are depending on package internals here. As this package depends on a specific exact version of expect,
 // this should not break.
 var equals = require('expect/build/jasmineUtils').equals;
-var customTesters = [require('expect/build/utils').iterableEquality];
+var customTesters = [
+	require('expect/build/utils').iterableEquality,
+	// As it is very tricky ‒ if not impossible ‒ to test two functions for equality, we consider two functions with the
+	// same length as equal.
+	function lenientFunctionEquality(first, second) {
+		if ('function' == typeof first && 'function' == typeof second) {
+			return first.length == second.length;
+		} /* else {
+			return undefined;
+		} */
+	}
+];
 /**
  * Returns whether the two passed arguments are equal to each other (`true`) or not (`false`).
  *
- * This function mimics `expect(…).toEqual(…)` in Jest. In fact, it uses the same implementation under the hood.
+ * This function mimics `expect(…).toEqual(…)` in Jest. In fact, it uses the same implementation under the hood. The
+ * only exception is that a lenient function equality tester was added, causing two functions with the same length to
+ * be considered equal by this function (but not necessarily by `expect(…).toEqual(…)`).
  */
 function jestlikeEqualityTester(first, second) {
 	return equals(first, second, customTesters);
@@ -30,7 +43,7 @@ if (global.jasmine) {
 	} catch (error) {
 		getJestTimeout = function() {
 			// There's a typeof operator which will detect that this isn't a number.
-			return undefined;
+			/* return undefined; */
 		};
 	}
 }
