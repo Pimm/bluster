@@ -71,22 +71,6 @@ This line throws an error if:
 
 If no error is thrown, you can rest assured that the function behaves the same when used promise-style and when used callback-style. As normal, you will now determine whether the `resource` constant is accurate.
 
-### Note
-
-`jest-bluster` uses Jest's internal (deep) equality tester. The agnostic `bluster` package, however, uses a shallow equality tester by default. Nested objects and arrays could be wrongly flagged as not equal.
-
-If your functions return nested objects or arrays, provide an equality tester as the second argument:
-```javascript
-bluster(
-	target,
-	(first, second) => {
-		// Returns whether first and second are equal to each
-		// other (true) or not (false).
-	}
-);
-```
-Existing deep equality testers which can be passed as the second argument include [deep-equal] and [Lodash'][lodash] `_.isEqual`.
-
 # License (X11/MIT)
 Copyright (c) 2019 Pimm "de Chinchilla" Hogeling
 
@@ -98,5 +82,3 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 [jest-snapshots]: https://jestjs.io/docs/snapshot-testing
-[deep-equal]: https://www.npmjs.com/package/deep-equal
-[lodash]: https://www.npmjs.com/package/lodash

@@ -36,24 +36,6 @@ Deze regel levert een fout op als:
 
 Bij geen fout weet je zeker dat de functie hetzelfde werkt, onafhankelijk van of deze promise-achtig of callback-achtig wordt aangeroepen. Zoals altijd moet je nog controleren of de `resource` constante klopt.
 
-## Opmerking
-
-Dit neutrale `bluster` pakket gebruikt standaard een ondiepe gelijkheidstester. Genestelde objecten en arrays kunnen onterecht als ongelijk worden gezien.
-
-Als je functie genestelde objecten of arrays teruggeeft, zorg dan voor een gelijkheidstester als tweede argument:
-```javascript
-bluster(
-	target,
-	(first, second) => {
-		// Bepaal of first en second gelijk zijn (true) of niet
-		// (false).
-	}
-);
-```
-Bestaande diepe gelijkheidstesters die je kunt gebruiken als tweede argument zijn o.a. [deep-equal] en `_.isEqual` van [Lodash][lodash].
-
-Merk op dat [`jest-bluster`][jest-bluster] standaard een diepe gelijkheidstester gebruikt.
-
 # Licentie (X11/MIT)
 Copyright (c) 2019 Pimm "de Chinchilla" Hogeling
 
@@ -65,5 +47,3 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 [jest-bluster]: https://github.com/Pimm/bluster/tree/master/jest
-[deep-equal]: https://www.npmjs.com/package/deep-equal
-[lodash]: https://www.npmjs.com/package/lodash

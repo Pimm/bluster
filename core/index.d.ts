@@ -44,17 +44,17 @@ type CallbackTarget<T> = ((callback: Callback<T>) => void)
  * #### On the equality tester
  *
  * If the second argument is omitted, the values from both branches or the errors from both branches will be tested for
- * equality by a shallow equality tester. Said default equality tester considers:
+ * equality by a lenient equality tester. Said default equality tester considers:
  *   * `true` equal to `true`;
  *   * `8` equal to `8`;
- *   * `{ text: 'wonderland' }` equal to `{ text: 'wonderland' }`; and
- *   * `[Math.PI]` equal to `[Math.PI]`;
+ *   * a function equal to any other function;
+ *   * `{ text: 'wonderland' }` equal to `{ text: 'wonderland' }` (but inequal to `{ text: 'cloud' }` or `{}`);
+ *   * `[Math.PI]` equal to `[Math.PI]` (but inequal to `[3]` or `[0, Math.PI]`); and
+ *   * `{ list: [x] }` equal to `{ list: [y] }`, regardless of the values of `x` and `y` as it does not transverse
+ *     nested objects or arrays.
  *
- * but considers `{ wrappee: { text: 'wonderland' } }` *inequal* to `{ wrappee: { text: 'wonderland' } }` because the
- * primitive (string) is burried too deep.
- *
- * If you require deep equality testing, provide an equality tester as the second argument. It is possible to pass in
- * Lodash' `_.isEqual`, for example.
+ * If you require stricter and/or nested equality testing, provide an equality tester as the second argument. It is
+ * possible to pass in Lodash' `_.isEqual`, for example.
  *
  * #### On the `this` keyword
  *

@@ -9,8 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bluster": "1.0.0",
-    "expect": "24.9.0"
+    "bluster": "1.0.0"
   },
   "scripts": {
     "test": "jest"

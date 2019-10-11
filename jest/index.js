@@ -1,29 +1,4 @@
 var coreBluster = require('bluster');
-// Note that we are depending on package internals here. As this package depends on a specific exact version of expect,
-// this should not break.
-var equals = require('expect/build/jasmineUtils').equals;
-var customTesters = [
-	require('expect/build/utils').iterableEquality,
-	// As it is very tricky ‒ if not impossible ‒ to test two functions for equality, we consider two functions with the
-	// same length as equal.
-	function lenientFunctionEquality(first, second) {
-		if ('function' == typeof first && 'function' == typeof second) {
-			return first.length == second.length;
-		} /* else {
-			return undefined;
-		} */
-	}
-];
-/**
- * Returns whether the two passed arguments are equal to each other (`true`) or not (`false`).
- *
- * This function mimics `expect(…).toEqual(…)` in Jest. In fact, it uses the same implementation under the hood. The
- * only exception is that a lenient function equality tester was added, causing two functions with the same length to
- * be considered equal by this function (but not necessarily by `expect(…).toEqual(…)`).
- */
-function jestlikeEqualityTester(first, second) {
-	return equals(first, second, customTesters);
-}
 /**
  * Returns the current timeout Jest uses, in milliseconds, as set by `jest.setTimeout(…)`.
  */
@@ -79,8 +54,22 @@ if (global.jasmine) {
  *   * that value produced by both branches does not match the snapshot.
  *
  * The second argument is an optional equality tester which is used to determine whether the values from both branches
- * or the errors from both branches are equal. If omitted, equality testing follows the same rules as
- * `expect(…).toEqual(…)`.
+ * or the errors from both branches are equal.
+ *
+ * #### On the equality tester
+ *
+ * If the second argument is omitted, the values from both branches or the errors from both branches will be tested for
+ * equality by a lenient equality tester. Said default equality tester considers:
+ *   * `true` equal to `true`;
+ *   * `8` equal to `8`;
+ *   * a function equal to any other function;
+ *   * `{ text: 'wonderland' }` equal to `{ text: 'wonderland' }` (but inequal to `{ text: 'cloud' }` or `{}`);
+ *   * `[Math.PI]` equal to `[Math.PI]` (but inequal to `[3]` or `[0, Math.PI]`); and
+ *   * `{ list: [x] }` equal to `{ list: [y] }`, regardless of the values of `x` and `y` as it does not transverse
+ *     nested objects or arrays.
+ *
+ * If you require stricter and/or nested equality testing, provide an equality tester as the second argument. It is
+ * possible to pass in Lodash' `_.isEqual`, for example.
  *
  * #### On the `this` keyword
  *
@@ -105,10 +94,6 @@ if (global.jasmine) {
  * https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/this#As_an_object_method
  */
 global.bluster = function bluster(target, equalityTester) {
-	// If no equality tester was passed, use the equality tester which mimics expect(…).toEqual(…).
-	if (undefined === equalityTester) {
-		equalityTester = jestlikeEqualityTester;
-	}
 	// Determine Jest's timeout. It is possible that jest.setTimeout(…) is called after this. The blustered function
 	// would be stuck with the old value. That would be slightly unfortunate.
 	var jestTimeout = getJestTimeout();
