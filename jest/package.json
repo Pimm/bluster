@@ -3,7 +3,9 @@
   "description": "Test both promises and callbacks in one go",
   "version": "1.0.0",
   "main": "index.js",
+  "types": "index.d.ts",
   "files": [
+    "index.d.ts",
     "copying.txt",
     "readme-nl.md"
   ],
