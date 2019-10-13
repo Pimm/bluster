@@ -76,6 +76,9 @@ export default function defaultEqualityTester(first, second) {
 	}
 	// Return true if the second object has the exact same set of properties as the first one, where the values of those
 	// properties are either equal non-objects, or (nested) objects (which are assumed equal without looking inside).
+	// You could think of this behaviour as the opposite of that of a typical shallow equality tester. A typical shallow
+	// equality tester doesn't transverse nested objects; it assumes nested objects are inequal. The logic below doesn't
+	// transverse nested objects either; but it assumes they are equal instead.
 	return keysFirst.every(key => {
 		return (
 			false != determineEqualFlat(first[key], second[key])
