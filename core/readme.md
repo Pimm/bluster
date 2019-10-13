@@ -1,6 +1,6 @@
 Test both promises and callbacks in one go.
 
-# Concept
+# Rationale
 
 If your function supports both promise-style and callback-style asynchronous calls, `bluster` will cut your tests in half.
 
