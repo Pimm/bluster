@@ -1,11 +1,10 @@
 {
   "private": true,
   "devDependencies": {
-    "@babel/preset-env": "^7.6.2",
-    "lerna": "^3.16.4",
-    "rollup": "^1.22.0",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-cleanup": "^3.1.1"
+    "@babel/preset-env": "^7.9.0",
+    "lerna": "^3.20.2",
+    "rollup": "^2.1.0",
+    "rollup-plugin-babel": "^4.4.0"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
