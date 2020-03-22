@@ -1,6 +1,5 @@
 const path = require('path');
 const babel = require('rollup-plugin-babel');
-const cleanup = require('rollup-plugin-cleanup');
 
 const packageConfiguration = require('./package.json');
 
@@ -17,9 +16,6 @@ export default {
 		}
 	],
 	plugins: [
-		babel(),
-		cleanup({
-			sourcemap: false
-		})
+		babel({ comments: false })
 	]
 };
