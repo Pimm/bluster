@@ -1,7 +1,7 @@
 {
   "name": "jest-bluster",
   "description": "Test both promises and callbacks in one go",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
@@ -11,7 +11,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bluster": "1.0.0"
+    "bluster": "^1.0.1"
   },
   "scripts": {
     "test": "jest"
