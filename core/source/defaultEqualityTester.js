@@ -57,7 +57,7 @@ function determineEqualFlat(first, second) {
  *  * objects (including arrays) which are _congruent_: having the same set of properties where every property is equal
  *    according to the rules above, or is a (nested) objects itself (including arrays).
  *
- * The last rule means that if both values are objects which contain nested  objects, those nested objects are not
+ * The last rule means that if both values are objects which contain nested objects, those nested objects are not
  * transversed futher. Rather, they are assumed equal.
  */
 export default function defaultEqualityTester(first, second) {
@@ -69,9 +69,8 @@ export default function defaultEqualityTester(first, second) {
 	// Now that the fact that both passed values are objects (but not errors) has been established, perform a shallow
 	// comparison. Start by finding the keys.
 	const keysFirst = Object.keys(first);
-	const propertyCountFirst = keysFirst.length;
 	// If the passed objects don't have the same number of properties, return false before even looking inside.
-	if (propertyCountFirst !== Object.keys(second).length) {
+	if (keysFirst.length !== Object.keys(second).length) {
 		return false;
 	}
 	// Return true if the second object has the exact same set of properties as the first one, where the values of those
