@@ -1,14 +1,27 @@
-type PromiseTarget<T> = (...arguments: any[]) => Promise<T>;
-type Callback<T> = (error: null | Error, value: T) => void;
-type CallbackTarget<T> = ((callback: Callback<T>) => void)
-		| ((a: any, callback: Callback<T>) => void)
-		| ((a: any, b: any, callback: Callback<T>) => void)
-		| ((a: any, b: any, c: any, callback: Callback<T>) => void)
-		| ((a: any, b: any, c: any, d: any, callback: Callback<T>) => void)
-		| ((a: any, b: any, c: any, d: any, e: any, callback: Callback<T>) => void)
-		| ((a: any, b: any, c: any, d: any, e: any, f: any, callback: Callback<T>) => void)
-		| ((a: any, b: any, c: any, d: any, e: any, f: any, g: any, callback: Callback<T>) => void)
-		| ((a: any, b: any, c: any, d: any, e: any, f: any, g: any, h: any, callback: Callback<T>) => void);
+type PromiseTarget = (...arguments: any[]) => Promise<any>;
+type Callback<R> = (error: any, result: R) => void;
+type CallbackV = (error?: any) => void;
+type CallbackTarget0<R> = (callback: Callback<R>) => void;
+type CallbackTarget0V = (callback: CallbackV) => void;
+type CallbackTarget1<A, R> = (a: A, callback: Callback<R>) => void;
+type CallbackTarget1V<A> = (a: A, callback: CallbackV) => void;
+type CallbackTarget2<A, B, R> = (a: A, b: B, callback: Callback<R>) => void;
+type CallbackTarget2V<A, B> = (a: A, b: B, callback: CallbackV) => void;
+type CallbackTarget3<A, B, C, R> = (a: A, b: B, c: C, callback: Callback<R>) => void;
+type CallbackTarget3V<A, B, C> = (a: A, b: B, c: C, callback: CallbackV) => void;
+type CallbackTarget4<A, B, C, D, R> = (a: A, b: B, c: C, d: D, callback: Callback<R>) => void;
+type CallbackTarget4V<A, B, C, D> = (a: A, b: B, c: C, d: D, callback: CallbackV) => void;
+type CallbackTargetn<R> =
+		  ((a: any, b: any, c: any, d: any, e: any, callback: Callback<R>) => void)
+		| ((a: any, b: any, c: any, d: any, e: any, f: any, callback: Callback<R>) => void)
+		| ((a: any, b: any, c: any, d: any, e: any, f: any, g: any, callback: Callback<R>) => void)
+		| ((a: any, b: any, c: any, d: any, e: any, f: any, g: any, h: any, callback: Callback<R>) => void);
+type CallbackTargetnV =
+		  ((a: any, b: any, c: any, d: any, e: any, callback: CallbackV) => void)
+		| ((a: any, b: any, c: any, d: any, e: any, f: any, callback: CallbackV) => void)
+		| ((a: any, b: any, c: any, d: any, e: any, f: any, g: any, callback: CallbackV) => void)
+		| ((a: any, b: any, c: any, d: any, e: any, f: any, g: any, h: any, callback: CallbackV) => void);
+type EqualityTester = (first: any, second: any) => boolean;
 /**
  * Creates a wrapper around the passed target function which calls it *twice*: once promise-style and once callback-
  * style.
@@ -78,15 +91,61 @@ type CallbackTarget<T> = ((callback: Callback<T>) => void)
  * This effect is not unique to this library; it is standard in JavaScript and TypeScript. Read more:
  * https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/this#As_an_object_method
  */
-declare function bluster<T>(
-	target: PromiseTarget<T>,
-	equalityTester?: (first: any, second: any) => boolean,
-	timeout?: number
-): (...arguments: any[]) => Promise<any>;
-declare function bluster<T>(
-	target: PromiseTarget<T> | CallbackTarget<T>,
-	equalityTester?: (first: any, second: any) => boolean,
-	timeout?: number
-): (...arguments: any[]) => Promise<any>;
+declare function bluster<T extends PromiseTarget>(
+	target: T,
+	equalityTester?: EqualityTester
+): T;
+declare function bluster<R>(
+	target: CallbackTarget0<R>,
+	equalityTester?: EqualityTester
+): () => Promise<R>;
+declare function bluster(
+	target: CallbackTarget0V,
+	equalityTester?: EqualityTester
+): () => Promise<void>;
+declare function bluster<A, R>(
+	target: CallbackTarget1<A, R>,
+	equalityTester?: EqualityTester
+): (a: A) => Promise<R>;
+declare function bluster<A>(
+	target: CallbackTarget1V<A>,
+	equalityTester?: EqualityTester
+): (a: A) => Promise<void>;
+declare function bluster<A, B, R>(
+	target: CallbackTarget2<A, B, R>,
+	equalityTester?: EqualityTester
+): (a: A, b: B) => Promise<R>;
+declare function bluster<A, B>(
+	target: CallbackTarget2V<A, B>,
+	equalityTester?: EqualityTester
+): (a: A, b: B) => Promise<void>;
+declare function bluster<A, B, C, R>(
+	target: CallbackTarget3<A, B, C, R>,
+	equalityTester?: EqualityTester
+): (a: A, b: B, c: C) => Promise<R>;
+declare function bluster<A, B, C>(
+	target: CallbackTarget3V<A, B, C>,
+	equalityTester?: EqualityTester
+): (a: A, b: B, c: C) => Promise<void>;
+declare function bluster<A, B, C, D, R>(
+	target: CallbackTarget4<A, B, C, D, R>,
+	equalityTester?: EqualityTester
+): (a: A, b: B, c: C, d: D) => Promise<R>;
+declare function bluster<A, B, C, D>(
+	target: CallbackTarget4V<A, B, C, D>,
+	equalityTester?: EqualityTester
+): (a: A, b: B, c: C, d: D) => Promise<void>;
+declare function bluster<R>(
+	target: CallbackTargetn<R>,
+	equalityTester?: EqualityTester
+): (...a: any) => Promise<R>;
+declare function bluster(
+	target: CallbackTargetnV,
+	equalityTester?: EqualityTester
+): (...a: any) => Promise<void>;
+declare function bluster(
+	target: Function,
+	equalityTester?: EqualityTester
+): (...a: any) => Promise<any>;
 
 export default bluster;
