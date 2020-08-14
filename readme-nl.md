@@ -13,7 +13,7 @@ function getResource(name: string, callback: (error: Error, resource: Resource) 
 ```
 (TypeScript types en overloading voor de duidelijkheid.)
 
-Ontwikkelaars kunnen deze functie promise-achtig en callback-achtig aanroepen. Net wat zij prettig vinden en wat in het project past. Cool! Maar hoe zou je dit testen? `bluster` laat je beide aftakkingen testen voor de prijs van één.
+Ontwikkelaars kunnen deze functie promise-achtig en callback-achtig aanroepen (ofwel continuation-passing style). Net wat zij prettig vinden en wat in het project past. Cool! Maar hoe zou je dit testen? `bluster` laat je beide aftakkingen testen voor de prijs van één.
 
 # Met Jest
 
