@@ -23,8 +23,8 @@ type CallbackTargetnV =
 		| ((a: any, b: any, c: any, d: any, e: any, f: any, g: any, h: any, callback: CallbackV) => void);
 type EqualityTester = (first: any, second: any) => boolean;
 /**
- * Creates a wrapper around the passed target function which calls it *twice*: once promise-style and once callback-
- * style.
+ * Creates a wrapper around the passed target function which calls it *twice*: once promise-style and once
+ * callback-style.
  *
  * Think of this single line
  * ```javascript

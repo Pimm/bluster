@@ -23,8 +23,8 @@ if (global.jasmine) {
 	}
 }
 /**
- * Creates a wrapper around the passed target function which calls it *twice*: once promise-style and once callback-
- * style.
+ * Creates a wrapper around the passed target function which calls it *twice*: once promise-style and once
+ * callback-style.
  *
  * Think of this single line
  * ```javascript
