@@ -1,9 +1,9 @@
 {
   "private": true,
   "devDependencies": {
-    "@babel/preset-env": "^7.12.1",
-    "lerna": "^3.22.1",
-    "rollup": "^2.33.0",
+    "@babel/preset-env": "^7.15.0",
+    "lerna": "^4.0.0",
+    "rollup": "^2.56.3",
     "rollup-plugin-babel": "^4.4.0"
   },
   "scripts": {
