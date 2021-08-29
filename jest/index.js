@@ -103,9 +103,8 @@ global.bluster = function bluster(target, equalityTester) {
 	return coreBluster(
 		target,
 		equalityTester,
-		// Set the timeout to half a second shorter than Jest's timeout, or half of Jest's timeout if that timeout is
-		// shorter than 1 second. This will hopefully cause bluster to time out before Jest does. Bluster timing out gives
-		// the user more helpful feedback than Jest timing out.
-		Math.max(jestTimeout - 500, jestTimeout / 2)
+		// Set the timeout to 100 milliseconds shorter than Jest's timeout. This will hopefully cause bluster to time out
+		// before Jest does. Bluster timing out gives the user more helpful feedback than Jest timing out.
+		Math.max(jestTimeout - 100, 0)
 	);
 };
