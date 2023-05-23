@@ -1,9 +1,9 @@
 const path = require('path');
-const babel = require('rollup-plugin-babel');
+const babel = require('@rollup/plugin-babel');
 
 const packageConfiguration = require('./package.json');
 
-export default {
+module.exports = {
 	input: path.join('source', 'index.js'),
 	output: [
 		{
@@ -16,6 +16,6 @@ export default {
 		}
 	],
 	plugins: [
-		babel({ comments: false })
+		babel({ comments: false, babelHelpers: 'bundled' })
 	]
 };

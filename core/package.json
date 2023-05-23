@@ -13,12 +13,12 @@
     "readme-nl.md"
   ],
   "license": "MIT",
-  "devDependencies": {
-    "@babel/preset-env": "^7.15.0",
-    "jest": "^27.1.0",
-    "rollup": "^2.56.3",
-    "rollup-plugin-babel": "^4.4.0",
-    "typescript": "^4.4.2"
+  "dependencies": {
+    "@babel/preset-env": "^7.21.5",
+    "@rollup/plugin-babel": "^6.0.3",
+    "core-js-pure": "^3.30.2",
+    "rollup": "^3.23.0",
+    "typescript": "^5.0.4"
   },
   "scripts": {
     "build": "rollup --config rollup.config.js",
@@ -27,7 +27,7 @@
   },
   "author": {
     "name": "Pimm \"de Chinchilla\" Hogeling",
-    "url": "https://null.house"
+    "url": "https://null.house/"
   },
   "repository": {
     "type": "git",

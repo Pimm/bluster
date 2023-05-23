@@ -11,10 +11,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bluster": "^1.0.1"
-  },
-  "devDependencies": {
-    "jest": "^27.1.0"
+    "bluster": "*"
   },
   "scripts": {
     "test": "jest"
@@ -26,7 +23,7 @@
   },
   "author": {
     "name": "Pimm \"de Chinchilla\" Hogeling",
-    "url": "https://null.house"
+    "url": "https://null.house/"
   },
   "repository": {
     "type": "git",
