@@ -1,4 +1,4 @@
-# bluster &middot; [![License (X11/MIT)](https://badgen.net/github/license/pimm/bluster)](https://github.com/Pimm/bluster/blob/master/copying.txt) [![npm version](https://badgen.net/npm/v/bluster)](https://www.npmjs.com/package/bluster) [![Build status](https://travis-ci.org/Pimm/bluster.svg?branch=master)](https://travis-ci.org/Pimm/bluster) [![Coverage status](https://coveralls.io/repos/github/Pimm/bluster/badge.svg?branch=master)](https://coveralls.io/github/Pimm/bluster?branch=master)
+# bluster &middot; [![License (X11/MIT)](https://badgen.net/github/license/pimm/bluster)](https://github.com/Pimm/bluster/blob/master/copying.txt) [![npm version](https://badgen.net/npm/v/bluster)](https://www.npmjs.com/package/bluster) [![Test status](https://github.com/Pimm/bluster/actions/workflows/test.yaml/badge.svg)](https://github.com/Pimm/bluster/actions/workflows/test.yaml) [![Coverage status](https://coveralls.io/repos/github/Pimm/bluster/badge.svg?branch=master)](https://coveralls.io/github/Pimm/bluster?branch=master)
 
 Test both promises and callbacks in one go.
 

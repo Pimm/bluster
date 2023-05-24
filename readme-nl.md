@@ -1,4 +1,4 @@
-# bluster &middot; [![Licentie (X11/MIT)](https://badgen.net/github/license/pimm/bluster)](https://github.com/Pimm/bluster/blob/master/copying.txt) [![npm versie](https://badgen.net/npm/v/bluster)](https://www.npmjs.com/package/bluster) [![Build status](https://travis-ci.org/Pimm/bluster.svg?branch=master)](https://travis-ci.org/Pimm/bluster) [![Coverage status](https://coveralls.io/repos/github/Pimm/bluster/badge.svg?branch=master)](https://coveralls.io/github/Pimm/bluster?branch=master)
+# bluster &middot; [![Licentie (X11/MIT)](https://badgen.net/github/license/pimm/bluster)](https://github.com/Pimm/bluster/blob/master/copying.txt) [![npm versie](https://badgen.net/npm/v/bluster)](https://www.npmjs.com/package/bluster) [![Test status](https://github.com/Pimm/bluster/actions/workflows/test.yaml/badge.svg)](https://github.com/Pimm/bluster/actions/workflows/test.yaml) [![Coverage status](https://coveralls.io/repos/github/Pimm/bluster/badge.svg?branch=master)](https://coveralls.io/github/Pimm/bluster?branch=master)
 
 Test promises én callbacks in één klap.
 
