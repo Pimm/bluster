@@ -72,7 +72,7 @@ This line throws an error if:
 If no error is thrown, you can rest assured that the function behaves the same when used promise-style and when used continuation-passing-style. As normal, you will now determine whether the `resource` constant is accurate.
 
 # License (X11/MIT)
-Copyright (c) 2019 Pimm "de Chinchilla" Hogeling
+Copyright (c) 2019, 2023 Pimm "de Chinchilla" Hogeling
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

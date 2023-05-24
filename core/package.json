@@ -1,7 +1,7 @@
 {
   "name": "bluster",
   "description": "Test both promises and callbacks in one go",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "main": "compiled/cjs/bluster.js",
   "module": "compiled/esm/bluster.js",
   "types": "index.d.ts",
