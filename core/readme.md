@@ -2,7 +2,7 @@ Test both promises and callbacks in one go.
 
 # Rationale
 
-If your function supports both promise-style and callback-style asynchronous calls, `bluster` will cut your tests in half.
+If your function supports both promise-style and continuation-passing-style asynchronous calls, `bluster` will cut your tests in half.
 
 Take this function for example:
 ```typescript
@@ -11,7 +11,7 @@ function getResource(name: string, callback: (error: Error, resource: Resource) 
 ```
 (TypeScript types and overloading for clarity.)
 
-Developers can call this function promise-style and callback-style (also known as continuation-passing style). Whichever they prefer and fits the rest of the project. Cool! But how would you go about testing this? `bluster` lets you test both branches at the cost of one.
+Developers can call this function promise-style and continuation-passing-style (also known as callback-style). Whichever they prefer and fits the rest of the project. Cool! But how would you go about testing this? `bluster` lets you test both branches at the cost of one.
 
 > ### **Jest users, see [`jest-bluster`][jest-bluster].**
 
@@ -34,7 +34,7 @@ This line throws an error if:
  * either `const promise = getResource('example.gz')` or `getResource('example.gz', callback)` produces an error, or
  * `const promise = getResource('example.gz')` and `getResource('example.gz', callback)` produce different values.
 
-If no error is thrown, you can rest assured that the function behaves the same when used promise-style and when used callback-style. As normal, you will now determine whether the `resource` constant is accurate.
+If no error is thrown, you can rest assured that the function behaves the same when used promise-style as it does when used continuation-passing-style. As normal, you will now determine whether the `resource` constant is accurate.
 
 # License (X11/MIT)
 Copyright (c) 2019 Pimm "de Chinchilla" Hogeling

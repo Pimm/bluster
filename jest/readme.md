@@ -2,7 +2,7 @@ Test both promises and callbacks in one go.
 
 # Rationale
 
-If your function supports both promise-style and callback-style asynchronous calls, `bluster` will cut your tests in half.
+If your function supports both promise-style and continuation-passing-style asynchronous calls, `bluster` will cut your tests in half.
 
 Take this function for example:
 ```typescript
@@ -11,7 +11,7 @@ function getResource(name: string, callback: (error: Error, resource: Resource) 
 ```
 (TypeScript types and overloading for clarity.)
 
-Developers can call this function promise-style and callback-style (also known as continuation-passing style). Whichever they prefer and fits the rest of the project. Cool! But how would you go about testing this? `bluster` lets you test both branches at the cost of one.
+Developers can call this function promise-style and continuation-passing-style (also known as callback-style). Whichever they prefer and fits the rest of the project. Cool! But how would you go about testing this? `bluster` lets you test both branches at the cost of one.
 
 # Installation
 
@@ -42,7 +42,7 @@ The test above will fail if:
  * `const promise = getResource('example.gz')` and `getResource('example.gz', callback)` produce different values, or
  * the value produced by both branches [does not match the snapshot][jest-snapshots].
 
-A passing test assures the function behaves correctly both when used promise-style and when used callback-style.
+A passing test assures the function behaves correctly both when used promise-style and when used continuation-passing-style.
 
 # License (X11/MIT)
 Copyright (c) 2019 Pimm "de Chinchilla" Hogeling

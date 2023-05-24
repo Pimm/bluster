@@ -11,7 +11,7 @@ function getResource(name: string, callback: (error: Error, resource: Resource) 
 ```
 (TypeScript types en overloading voor de duidelijkheid.)
 
-Ontwikkelaars kunnen deze functie promise-achtig en callback-achtig (ofwel continuation-passing style) aanroepen. Net wat zij prettig vinden en wat in het project past. Cool! Maar hoe zou je dit testen? `bluster` laat je beide aftakkingen testen voor de prijs van één.
+Ontwikkelaars kunnen deze functie promise-achtig en continuation-passing-achtig (ofwel callback-achtig) aanroepen. Net wat zij prettig vinden en wat in het project past. Cool! Maar hoe zou je dit testen? `bluster` laat je beide aftakkingen testen voor de prijs van één.
 
 # Installatie
 
@@ -42,7 +42,7 @@ Bovenstaande test faalt als:
  * `const promise = getResource('example.gz')` en `getResource('example.gz', callback)` verschillende waarden opleveren, of
  * de waarde die beide aftakkingen oplevert [niet overeenkomt met de snapshot][jest-snapshots].
 
-Een slagende test bewijst dat de functie ‒ zowel wanneer deze promise-achtig als wanneer deze callback-achtig wordt aangeroepen ‒ correct werkt.
+Een slagende test bewijst dat de functie ‒ zowel wanneer deze promise-achtig als wanneer deze continuation-passing-achtig wordt aangeroepen ‒ correct werkt.
 
 # Licentie (X11/MIT)
 Copyright (c) 2019 Pimm "de Chinchilla" Hogeling

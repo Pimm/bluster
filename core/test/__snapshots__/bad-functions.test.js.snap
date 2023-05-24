@@ -10,20 +10,20 @@ exports[`bad-functions: doOnlyPromises 1`] = `
 exports[`bad-functions: failCallback 1`] = `
 {
   "cause": [Error: No good!],
-  "message": "An error occurred while calling the passed function callback-style",
+  "message": "An error occurred while calling the passed function continuation-passing-style",
 }
 `;
 
 exports[`bad-functions: rejectCallback 1`] = `
 {
   "cause": [Error: No good!],
-  "message": "The promise-style call fulfilled whereas the callback-style call rejected",
+  "message": "The promise-style call fulfilled whereas the continuation-passing-style call rejected",
 }
 `;
 
 exports[`bad-functions: rejectPromise 1`] = `
 {
   "cause": [Error: No good!],
-  "message": "The promise-style call rejected whereas the callback-style call fulfilled",
+  "message": "The promise-style call rejected whereas the continuation-passing-style call fulfilled",
 }
 `;

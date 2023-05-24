@@ -68,8 +68,8 @@ test('bad-functions', () => {
 		// This function which only supports promise-style calls will never call the callback passed to it, and therefore
 		// never settle.
 		expect(bluster(doOnlyPromises, undefined, 10)()).rejects.toThrow('did not settle'),
-		// This function which only supports callback-style will try to call the callback, which will not be there when
-		// called promise-style.
+		// This function which only supports continuation-passing-style will try to call the callback, which will not be
+		// there when called promise-style.
 		expect(
 			bluster(doOnlyCallbacks)()
 			.catch(error => ({
@@ -77,11 +77,12 @@ test('bad-functions', () => {
 				cause: error.cause
 			}))
 		).resolves.toMatchSnapshot('doOnlyPromises'),
-		// This function is slightly better than the previous, as it will only try to call the callback when called callback-style.
+		// This function is slightly better than the previous, as it will only try to call the callback when called
+		// continuation-passing-style.
 		expect(bluster(doOnlyCallbacksIfPossible)()).rejects.toThrow('did not return a promise'),
 		// This function which ‒ when called promise-style ‒ returns a neverending promise which will never settle.
 		expect(bluster(makeNeverendingPromise, undefined, 10)()).rejects.toThrow('did not settle'),
-		// This function rejects when called promise-style but fulfills when called callback-style.
+		// This function rejects when called promise-style but fulfills when called continuation-passing-style.
 		expect(
 			bluster(rejectPromise)()
 			.catch(error => ({
@@ -89,7 +90,7 @@ test('bad-functions', () => {
 				cause: error.cause
 			}))
 		).resolves.toMatchSnapshot('rejectPromise'),
-		// This function fulfills when called promise-style but rejects when called callback-style.
+		// This function fulfills when called promise-style but rejects when called continuation-passing-style.
 		expect(
 			bluster(rejectCallback)()
 			.catch(error => ({
@@ -97,7 +98,7 @@ test('bad-functions', () => {
 				cause: error.cause
 			}))
 		).resolves.toMatchSnapshot('rejectCallback'),
-		// This function fulfills when called promise-style but throws an error when called callback-style.
+		// This function fulfills when called promise-style but throws an error when called continuation-passing-style.
 		expect(
 			bluster(failCallback)()
 			.catch(error => ({

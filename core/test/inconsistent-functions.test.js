@@ -4,7 +4,8 @@
 
 import bluster from './implementation';
 
-// This function returns a different temperature depending on whether it was called promise-style or callback-style.
+// This function returns a different temperature depending on whether it was called promise-style or
+// continuation-passing-style.
 function getTemperature() {
 	var callback /* = undefined */;
 	if (arguments.length > 0) {
@@ -16,8 +17,8 @@ function getTemperature() {
 		callback(null, 18.2);
 	}
 }
-// This function throws an error with a different message depending on whether it was called promise-style or callback-
-// style.
+// This function throws an error with a different message depending on whether it was called promise-style or
+// continuation-passing-style.
 function failGettingTemperature() {
 	var callback /* = undefined */;
 	if (arguments.length > 0) {

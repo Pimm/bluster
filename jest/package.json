@@ -36,6 +36,7 @@
     "test",
     "async",
     "promise",
-    "callback"
+    "callback",
+    "coverage"
   ]
 }

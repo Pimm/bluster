@@ -4,7 +4,7 @@ Test promises én callbacks in één klap.
 
 # Motivatie
 
-Als jouw functie promise-achtig én callback-achtig kan worden aangeroepen, halveert `bluster` jouw tests.
+Als jouw functie promise-achtig én continuation-passing-achtig kan worden aangeroepen, halveert `bluster` jouw tests.
 
 Neem deze functie als voorbeeld:
 ```typescript
@@ -13,7 +13,7 @@ function getResource(name: string, callback: (error: Error, resource: Resource) 
 ```
 (TypeScript types en overloading voor de duidelijkheid.)
 
-Ontwikkelaars kunnen deze functie promise-achtig en callback-achtig aanroepen (ofwel continuation-passing style). Net wat zij prettig vinden en wat in het project past. Cool! Maar hoe zou je dit testen? `bluster` laat je beide aftakkingen testen voor de prijs van één.
+Ontwikkelaars kunnen deze functie promise-achtig en continuation-passsing-achtig aanroepen (ofwel callback-achtig). Net wat zij prettig vinden en wat in het project past. Cool! Maar hoe zou je dit testen? `bluster` laat je beide aftakkingen testen voor de prijs van één.
 
 # Met Jest
 
@@ -46,7 +46,7 @@ Bovenstaande test faalt als:
  * `const promise = getResource('example.gz')` en `getResource('example.gz', callback)` verschillende waarden opleveren, of
  * de waarde die beide aftakkingen oplevert [niet overeenkomt met de snapshot][jest-snapshots].
 
-Een slagende test bewijst dat de functie ‒ zowel wanneer deze promise-achtig als wanneer deze callback-achtig wordt aangeroepen ‒ correct werkt.
+Een slagende test bewijst dat de functie ‒ zowel wanneer deze promise-achtig als wanneer deze continuation-passing-achtig wordt aangeroepen ‒ correct werkt.
 
 # Zonder Jest
 
@@ -69,7 +69,7 @@ Deze regel levert een fout op als:
  * `const promise = getResource('example.gz')` ofwel `getResource('example.gz', callback)` een fout oplevert, of
  * `const promise = getResource('example.gz')` en `getResource('example.gz', callback)` verschillende waarden opleveren.
 
-Bij geen fout weet je zeker dat de functie hetzelfde werkt, onafhankelijk van of deze promise-achtig of callback-achtig wordt aangeroepen. Zoals altijd moet je nog controleren of de `resource` constante klopt.
+Bij geen fout weet je zeker dat de functie hetzelfde werkt, onafhankelijk van of deze promise-achtig of continuation-passing-achtig wordt aangeroepen. Zoals altijd moet je nog controleren of de `resource` constante klopt.
 
 # Licentie (X11/MIT)
 Copyright (c) 2019 Pimm "de Chinchilla" Hogeling

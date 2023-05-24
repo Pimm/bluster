@@ -3,28 +3,22 @@ var coreBluster = require('bluster');
  * Returns the current timeout Jest uses, in milliseconds, as set by `jest.setTimeout(…)`.
  */
 var getJestTimeout;
-// (See src/index.ts in jest-runtime: https://github.com/facebook/jest/blob/master/packages/jest-runtime/src/index.ts.)
-if (global.jasmine) {
+// (See src/index.ts in jest-runtime: https://github.com/jestjs/jest/blob/main/packages/jest-runtime/src/index.ts.)
+var testTimeoutSymbol;
+try {
+	testTimeoutSymbol = Symbol.for('TEST_TIMEOUT_SYMBOL');
 	getJestTimeout = function() {
-		return global.jasmine._DEFAULT_TIMEOUT_INTERVAL;
+		return global[testTimeoutSymbol];
 	};
-} else {
-	var testTimeoutSymbol;
-	try {
-		testTimeoutSymbol = Symbol.for('TEST_TIMEOUT_SYMBOL');
-		getJestTimeout = function() {
-			return global[testTimeoutSymbol];
-		};
-	} catch (error) {
-		getJestTimeout = function() {
-			// There's a typeof operator which will detect that this isn't a number.
-			/* return undefined; */
-		};
-	}
+} catch (error) {
+	getJestTimeout = function() {
+		// There's a typeof operator below which will detect that this function doesn't return a number.
+		/* return undefined; */
+	};
 }
 /**
  * Creates a wrapper around the passed target function which calls it *twice*: once promise-style and once
- * callback-style.
+ * continuation-passing-style (also known as callback-style).
  *
  * Think of this single line
  * ```javascript
@@ -36,7 +30,7 @@ if (global.jasmine) {
  * getResource('example.gz', callback);
  * ```
  *
- * This facilitates testing both the promise-style and the callback-style branches in one go:
+ * This facilitates testing both the promise-style and the continuation-passing-style branches in one go:
  *
  * ```javascript
  * expect(bluster(getResource)('example.gz')).resolves.toMatchSnapshot();
@@ -44,7 +38,7 @@ if (global.jasmine) {
  *
  * A promise is returned which either:
  *   * resolves to the value from both branches, or
- *   * rejects to the error from both branches, or
+ *   * rejects to the cause from both branches, or
  *   * if the two branches do not behave identical, rejects to an error which explains the situation.
  *
  * Put differently, the test above will fail if:
@@ -54,7 +48,7 @@ if (global.jasmine) {
  *   * that value produced by both branches does not match the snapshot.
  *
  * The second argument is an optional equality tester which is used to determine whether the values from both branches
- * or the errors from both branches are equal.
+ * (in case of fulfillment) or the causes from both branches (in case of rejection) are equal.
  *
  * #### On the equality tester
  *
@@ -68,8 +62,8 @@ if (global.jasmine) {
  *   * `{ list: [x] }` equal to `{ list: [y] }`, regardless of the values of `x` and `y` as it does not transverse
  *     nested objects or arrays.
  *
- * If you require stricter and/or nested equality testing, provide an equality tester as the second argument. It is
- * possible to pass in Lodash' `_.isEqual`, for example.
+ * If you require stricter and/or nested equality testing, provide one as the second argument. It is possible to pass
+ * in Lodash' `_.isEqual`, for example.
  *
  * #### On the `this` keyword
  *

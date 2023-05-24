@@ -5,6 +5,7 @@ const packageConfiguration = require('./package.json');
 
 module.exports = {
 	input: path.join('source', 'index.js'),
+	external: ['core-js-pure/stable/promise/all-settled'],
 	output: [
 		{
 			format: 'esm',
